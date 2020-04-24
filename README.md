@@ -5,3 +5,4 @@
 ![alt text](https://github.com/iuliancioarca/AdaptiveSampling.jl/blob/master/examples/anchor_point.gif "")
 
 Adaptive sampling rate algorithms for lossy waveform compression.
+More compression methods to come. See examples folder for usage.
