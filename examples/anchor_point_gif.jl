@@ -13,13 +13,14 @@ zg = 0.01*randn(length(y))
 y .= y .+ zg
 thr = 0.05 #absolute threshold
 
-## Basic usage, output vector should be smaller than input vector
+## Basic usage:
+# 1. base function
 @time tc,yc, idx2save = AdaptiveSampling.anchor_point(t,y,detail_th)
 @info "compression_ratio" compression_ratio = length(t)/length(tc)
-
+# 2. split the input array in chunks, compress each of them and concatenate -> faster
 @time tc,yc, idx2save = AdaptiveSampling.anchor_point(t,y,detail_th,true)
 @info "compression_ratio" compression_ratio = length(t)/length(tc)
-
+# 3. no split of the input array, same as 1.
 @time tc,yc, idx2save = AdaptiveSampling.anchor_point(t,y,detail_th,false)
 @info "compression_ratio" compression_ratio = length(t)/length(tc)
 
