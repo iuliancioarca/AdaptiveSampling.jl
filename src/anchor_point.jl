@@ -1,5 +1,5 @@
 ################################################################################
-function anchor_point(t,y,detail_th,split_wfm::Bool)
+function anchor_point(t,y::Vector{Float},detail_th,split_wfm::Bool)
     if split_wfm
         nr_split = max(Int(round(length(y)/5e3)),1)
         #remove extra points for reshape TO BE SOLVED!!!
@@ -31,7 +31,7 @@ function anchor_point(t,y,detail_th,split_wfm::Bool)
     return t_new, y_new, idx2save
 end
 ################################################################################
-function anchor_point(t,y,detail_th)
+function anchor_point(t,y::Vector{Float},detail_th)
     # Compress signal by removing redundant points.
     # Adjust waveform detail/compression ratio with 'detail_th' (maximum allowed
     # difference between original and approximated points from the signal)
