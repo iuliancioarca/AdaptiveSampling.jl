@@ -5,7 +5,7 @@ using Test
 @testset "AdaptiveSampling.jl" begin
     fs = 5e6
     dt = 1/fs
-    t = 0:dt:0.00004
+    t = collect(0:dt:0.00004)
     f = 1e5
     y = sin.(2*pi*f*t)
     y[10:12]   .= 5;
