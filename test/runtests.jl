@@ -21,7 +21,7 @@ using Test
     @test length(tc) < length(t) # compressed signal should be smaller than original
     @info "compression_ratio" compression_ratio = length(t)/length(tc)
 
-    @time tc,yc, idx2save, anim = AdaptiveSampling.anchor_point_gif(t,y,thr)
-    @test length(tc) < length(t) # compressed signal should be smaller than original
-    @info "compression_ratio" compression_ratio = length(t)/length(tc)
+    # @time tc,yc, idx2save, anim = AdaptiveSampling.anchor_point_gif(t,y,thr)
+    # @test length(tc) < length(t) # compressed signal should be smaller than original
+    # @info "compression_ratio" compression_ratio = length(t)/length(tc)
 end

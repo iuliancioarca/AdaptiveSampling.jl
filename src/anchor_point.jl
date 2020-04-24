@@ -102,56 +102,56 @@ function get_d_max(idx_l,idx_r,y)
     return d_max, idx_d_max
 end
 ################################################################################
-function anchor_point_gif(t,y,detail_th)
-    # Compress signal by removing redundant points.
-    # Adjust waveform detail/compression ratio with 'detail_th' (maximum allowed
-    # difference between original and approximated points from the signal)
-    # For best performance perform wavelet noise reduction first
-    # This version is written just for fun demonstration of the algorithm
-    yln           = length(y)
-    idx_l         = 1
-    idx_r         = yln
-    idx_d_max     = 1
-    cond_break    = true
-    d_max         = 0.0
-    M             = zeros(Int,yln) # hash table for relevant indices
-    idx2save      = zeros(Int,yln+2)
-    cnt           = 2
-    idx2save[1:2] = [1,yln]
-    anim = @animate for i = 1:(2*length(y))
-        # get maximum error(difference) and index, between original chunk of signal
-        # and linear approximation
-        d_max, idx_d_max = get_d_max(idx_l,idx_r,y)
-        # save all indices
-        M[idx_d_max] = idx_r
-        if d_max > detail_th
-            # if computed error is greater than maximum allowed error, save
-            # next point index and call get_d_max(idx_l,idx_r,y) at next
-            # iteration; keep going towards leftmost branches
-            cnt           = cnt + 1
-            idx_r         = idx_d_max
-            idx2save[cnt] = idx_d_max
-            idx2save_aux = sort(idx2save)
-            plt = plot(t,y,color=:blue, markershape=:circle, markersize=3, linealpha=0.2, legend=:none)
-            plot!(plt, t[idx2save_aux[idx2save_aux.!=0]],y[idx2save_aux[idx2save_aux.!=0]],
-            color=:red, markershape=:circle, markersize=5, linealpha=1, legend=:none)
-        else
-            # if computed error is smaller than maximum allowed error, stop, go
-            # right(to the next waveform segment) and call get_d_max(idx_l,idx_r,y)
-            # at the next iteration
-            idx_l     = idx_r;
-            if idx_l != yln
-                idx_r = M[idx_l]
-            else
-                break
-            end
-        end
-    end
-    # sort all indexes corresponding to relevent points and generate resampled
-    # signal
-    idx2save = idx2save[1:cnt]
-    idx2save = sort(idx2save)
-    t_new    = @view t[idx2save]
-    y_new    = @view y[idx2save]
-    return t_new, y_new, idx2save, anim
-end
+# function anchor_point_gif(t,y,detail_th)
+#     # Compress signal by removing redundant points.
+#     # Adjust waveform detail/compression ratio with 'detail_th' (maximum allowed
+#     # difference between original and approximated points from the signal)
+#     # For best performance perform wavelet noise reduction first
+#     # This version is written just for fun demonstration of the algorithm
+#     yln           = length(y)
+#     idx_l         = 1
+#     idx_r         = yln
+#     idx_d_max     = 1
+#     cond_break    = true
+#     d_max         = 0.0
+#     M             = zeros(Int,yln) # hash table for relevant indices
+#     idx2save      = zeros(Int,yln+2)
+#     cnt           = 2
+#     idx2save[1:2] = [1,yln]
+#     anim = @animate for i = 1:(2*length(y))
+#         # get maximum error(difference) and index, between original chunk of signal
+#         # and linear approximation
+#         d_max, idx_d_max = get_d_max(idx_l,idx_r,y)
+#         # save all indices
+#         M[idx_d_max] = idx_r
+#         if d_max > detail_th
+#             # if computed error is greater than maximum allowed error, save
+#             # next point index and call get_d_max(idx_l,idx_r,y) at next
+#             # iteration; keep going towards leftmost branches
+#             cnt           = cnt + 1
+#             idx_r         = idx_d_max
+#             idx2save[cnt] = idx_d_max
+#             idx2save_aux = sort(idx2save)
+#             plt = plot(t,y,color=:blue, markershape=:circle, markersize=3, linealpha=0.2, legend=:none)
+#             plot!(plt, t[idx2save_aux[idx2save_aux.!=0]],y[idx2save_aux[idx2save_aux.!=0]],
+#             color=:red, markershape=:circle, markersize=5, linealpha=1, legend=:none)
+#         else
+#             # if computed error is smaller than maximum allowed error, stop, go
+#             # right(to the next waveform segment) and call get_d_max(idx_l,idx_r,y)
+#             # at the next iteration
+#             idx_l     = idx_r;
+#             if idx_l != yln
+#                 idx_r = M[idx_l]
+#             else
+#                 break
+#             end
+#         end
+#     end
+#     # sort all indexes corresponding to relevent points and generate resampled
+#     # signal
+#     idx2save = idx2save[1:cnt]
+#     idx2save = sort(idx2save)
+#     t_new    = @view t[idx2save]
+#     y_new    = @view y[idx2save]
+#     return t_new, y_new, idx2save, anim
+# end

@@ -1,5 +1,5 @@
 module AdaptiveSampling
-using Plots
+#using Plots
 include("anchor_point.jl")
 
 end # module
