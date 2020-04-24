@@ -1,5 +1,5 @@
 module AdaptiveSampling
 
-greet() = print("Hello World!")
+include("anchor_point.jl")
 
 end # module
