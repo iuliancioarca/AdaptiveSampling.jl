@@ -1,14 +1,14 @@
 ################################################################################
 function anchor_point(t,y,detail_th,split_wfm::Bool)
     if split_wfm
-        nr_split = max(Int64(round(length(y)/5e3)),1)
+        nr_split = max(Int(round(length(y)/5e3)),1)
         #remove extra points for reshape TO BE SOLVED!!!
         aux = rem(length(y),nr_split)
         dt  = t[2] - t[1]
         y   = y[1:end-aux]
         t   = t[1:end-aux]
-        t  = reshape(t,Int64(length(t)/nr_split),nr_split)
-        y  = reshape(y,Int64(length(y)/nr_split),nr_split)
+        t  = reshape(t,Int(length(t)/nr_split),nr_split)
+        y  = reshape(y,Int(length(y)/nr_split),nr_split)
         # Collect the results as they become available.
         t_new    = [0.0, 0.0]
         y_new    = [0.0, 0.0]
@@ -42,8 +42,8 @@ function anchor_point(t,y,detail_th)
     idx_d_max     = 1
     cond_break    = true
     d_max         = 0.0
-    M             = zeros(Int64,yln) # hash table for relevant indices
-    idx2save      = zeros(Int64,yln+2)
+    M             = zeros(Int,yln) # hash table for relevant indices
+    idx2save      = zeros(Int,yln+2)
     cnt           = 2
     idx2save[1:2] = [1,yln]
     while cond_break
