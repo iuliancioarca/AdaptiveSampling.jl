@@ -15,13 +15,13 @@ thr = 0.05 #absolute threshold
 
 ## Basic usage:
 # 1. base function
-@time tc,yc, idx2save = AdaptiveSampling.anchor_point(t,y,detail_th)
+@time tc,yc, idx2save = AdaptiveSampling.anchor_point(t,y,thr)
 @info "compression_ratio" compression_ratio = length(t)/length(tc)
 # 2. split the input array in chunks, compress each of them and concatenate -> faster
-@time tc,yc, idx2save = AdaptiveSampling.anchor_point(t,y,detail_th,true)
+@time tc,yc, idx2save = AdaptiveSampling.anchor_point(t,y,thr,true)
 @info "compression_ratio" compression_ratio = length(t)/length(tc)
 # 3. no split of the input array, same as 1.
-@time tc,yc, idx2save = AdaptiveSampling.anchor_point(t,y,detail_th,false)
+@time tc,yc, idx2save = AdaptiveSampling.anchor_point(t,y,thr,false)
 @info "compression_ratio" compression_ratio = length(t)/length(tc)
 
 ## Generating a gif
