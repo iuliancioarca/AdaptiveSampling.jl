@@ -3,6 +3,9 @@ uuid = "3b66102d-328b-48ec-8bc0-9581ba60faba"
 authors = ["iuliancioarca"]
 version = "0.1.0"
 
+[deps]
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+
 [compat]
 julia = "1"
 
