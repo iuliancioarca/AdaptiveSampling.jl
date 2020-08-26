@@ -4,5 +4,5 @@
 # AdaptiveSampling.jl
 ![alt text](https://github.com/iuliancioarca/AdaptiveSampling.jl/blob/master/examples/anchor_point.gif "")
 
-Adaptive sampling rate algorithms for lossy waveform compression.
+Adaptive sampling rate algorithms for lossy waveform compression. Loosely based on https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm.
 More compression methods to come. See examples folder for usage.
